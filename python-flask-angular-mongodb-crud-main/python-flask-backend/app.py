@@ -75,7 +75,26 @@ def onedata(id):
         print(dataDict)
         return jsonify(dataDict)
         
+       //update
+    if request.method == 'PUT':
+            body = request.json
+            firstName = body['firstName']
+            lastName = body['lastName']
+            emailId = body['emailId']
 
+            db['users'].update_one(
+                {'_id': ObjectId(id)},
+                {
+                    "$set": {
+                        "firstName":firstName,
+                        "lastName":lastName,
+                        "emailId": emailId
+                    }
+                }
+            )
+
+            print('\n # Update successful # \n')
+            return jsonify({'status': 'Data id: ' + id + ' is updated!'})
 
     
 if __name__ == '__main__':
