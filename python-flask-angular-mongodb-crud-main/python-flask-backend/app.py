@@ -74,6 +74,12 @@ def onedata(id):
         }
         print(dataDict)
         return jsonify(dataDict)
+    
+    //delete
+    if request.method == 'DELETE':
+        db['users'].delete_many({'_id': ObjectId(id)})
+        print('\n # Deletion successful # \n')
+        return jsonify({'status': 'Data id: ' + id + ' is deleted!'})
         
        //update
     if request.method == 'PUT':
